@@ -1,1 +1,3 @@
 ml/store/*
+.idea/*
+.DS_Store
