@@ -1,6 +1,6 @@
 from keras.utils import np_utils
 import numpy as np
-import ml.model as ml
+import model as ml
 
 
 root_dir = './store/images'
