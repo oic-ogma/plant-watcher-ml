@@ -3,7 +3,6 @@ import numpy as np
 import model as ml
 
 
-root_dir = './store/images'
 categories = ['asagao', 'cosmos', 'himawari', 'margaret', 'pansy']
 classes = len(categories)
 image_size = 120
