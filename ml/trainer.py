@@ -1,11 +1,11 @@
 from keras.utils import np_utils
 import numpy as np
 import model as ml
+import os
 
 
 categories = ['asagao', 'cosmos', 'himawari', 'margaret', 'pansy']
 classes = len(categories)
-image_size = 120
 
 
 def main():
@@ -20,28 +20,32 @@ def main():
 
     model = model_train(X_train, y_train)
     model_eval(model, X_test, y_test)
+    model_save(model)
 
 
-# モデルを訓練する
 def model_train(X, y):
 
     model = ml.build_model(X.shape[1:], classes)
     model.fit(X, y, batch_size=32, epochs=30)
 
-    # モデルを保存
-    hdf5_file = './store/model.hdf5'
-    model.save_weights(hdf5_file)
-
     return model
 
 
-# モデルを評価する
 def model_eval(model, X, y):
 
     score = model.evaluate(X, y)
 
     print('loss = ', score[0])
     print('accuracy = ', score[1])
+
+
+def model_save(model):
+
+    hdf5_file = './store/model.hdf5'
+
+    if not os.path.exists(hdf5_file):
+        model.save_weights(hdf5_file)
+        print("Saved.")
 
 
 if __name__ == '__main__':

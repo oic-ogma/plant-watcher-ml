@@ -12,25 +12,24 @@ api = Flask(__name__)
 @api.route('/get_plant', methods=['POST'])
 def main():
 
-    file = request.files['image']
+    post_file = request.files['image']
 
-    X = dp.image_convert(file, image_size)
+    X = dp.image_convert(post_file, image_size)
 
     model = ml.build_model(X.shape[1:], classes)
     model.load_weights('./store/model.hdf5')
 
-    predict = model.predict(X)
+    predict = model.predict_proba(X)
+    predict_key = dp.sort_predict_key(predict[0], 3)
 
     plants = []
 
-    for i, p in enumerate(predict):
-        y = p.argmax()
-
+    for y in predict_key:
         plants.append(categories[y])
 
     result = {
         "data": {
-            "plant": plants[0]
+            "plant": plants
         }
     }
 
@@ -41,6 +40,12 @@ def main():
 def not_found(error):
 
     return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@api.errorhandler(400)
+def bad_request(error):
+
+    return make_response(jsonify({'error': 'Nothing post data'}), 400)
 
 
 if __name__ == '__main__':

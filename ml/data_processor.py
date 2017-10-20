@@ -16,4 +16,15 @@ def image_convert(file, img_size):
 
     X = np.array(X)
 
+    X = X.astype('float') / 256
+
     return X
+
+
+# 上位num件の予測結果のkeyを降順で返す
+def sort_predict_key(data, num):
+
+    sort_data_key = np.argsort(data)[-1::-1]
+    y = sort_data_key[:num]
+
+    return y
