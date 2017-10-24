@@ -1,6 +1,7 @@
 import model as ml
 import data_processor as dp
 from flask import Flask, make_response, jsonify, request
+import os
 
 categories = ['asagao', 'cosmos', 'himawari', 'margaret', 'pansy']
 classes = len(categories)
@@ -17,7 +18,12 @@ def main():
     X = dp.image_convert(post_file, image_size)
 
     model = ml.build_model(X.shape[1:], classes)
-    model.load_weights('./store/model.hdf5')
+
+    if not os.path.exists('./store/model.hdf5'):
+        # dockerでの実行に必要(実行時のカレントディレクトリがずれてるため)
+        model.load_weights('/home/ml/store/model.hdf5')
+    else:
+        model.load_weights('./store/model.hdf5')
 
     predict = model.predict_proba(X)
     predict_key = dp.sort_predict_key(predict[0], 3)
@@ -49,4 +55,4 @@ def bad_request(error):
 
 
 if __name__ == '__main__':
-    api.run(host='127.0.0.1', port=3000)
+    api.run(host='0.0.0.0', port=8000)
