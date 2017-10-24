@@ -18,12 +18,7 @@ def main():
     X = dp.image_convert(post_file, image_size)
 
     model = ml.build_model(X.shape[1:], classes)
-
-    if not os.path.exists('./store/model.hdf5'):
-        # dockerでの実行に必要(実行時のカレントディレクトリがずれてるため)
-        model.load_weights('/home/ml/store/model.hdf5')
-    else:
-        model.load_weights('./store/model.hdf5')
+    model.load_weights(os.path.join(os.path.dirname(__file__), 'store/model.hdf5'))
 
     predict = model.predict_proba(X)
     predict_key = dp.sort_predict_key(predict[0], 3)
