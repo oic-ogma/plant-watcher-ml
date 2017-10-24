@@ -1,5 +1,7 @@
 from PIL import Image
 import numpy as np
+import os
+import json
 
 
 def image_convert(file, img_size):
@@ -28,3 +30,12 @@ def sort_predict_key(data, num):
     y = sort_data_key[:num]
 
     return y
+
+
+def get_plants_name():
+
+    f = open(os.path.join(os.path.dirname(__file__), 'store/plant.json'), 'r')
+    json_data = json.load(f)
+    categories = list(json_data.values())[0]
+
+    return categories

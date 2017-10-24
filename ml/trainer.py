@@ -1,10 +1,11 @@
 from keras.utils import np_utils
+import data_processor as dp
 import numpy as np
 import model as ml
 import os
 
 
-categories = ['asagao', 'cosmos', 'himawari', 'margaret', 'pansy']
+categories = dp.get_plants_name()
 classes = len(categories)
 
 

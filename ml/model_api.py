@@ -3,7 +3,8 @@ import data_processor as dp
 from flask import Flask, make_response, jsonify, request
 import os
 
-categories = ['asagao', 'cosmos', 'himawari', 'margaret', 'pansy']
+
+categories = dp.get_plants_name()
 classes = len(categories)
 image_size = 120
 

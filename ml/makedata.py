@@ -1,11 +1,11 @@
 from sklearn import model_selection
+import data_processor as dp
 from PIL import Image
 import glob
 import numpy as np
 
 root_dir = "./store/images"
-categories = ["asagao", "cosmos", "himawari", "margaret", "pansy"]
-classes = len(categories)
+categories = dp.get_plants_name()
 image_size = 120
 
 X = []  # 画像データ
