@@ -2,3 +2,4 @@ ml/store/*
 .idea/*
 .DS_Store
 __pycache__
+image/
