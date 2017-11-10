@@ -1,4 +1,5 @@
 from keras.utils import np_utils
+from keras.callbacks import TensorBoard
 import data_processor as dp
 import numpy as np
 import model as ml
@@ -27,7 +28,15 @@ def main():
 def model_train(X, y):
 
     model = ml.build_model(X.shape[1:], classes)
-    model.fit(X, y, batch_size=32, epochs=30)
+
+    path = './store/tb_logs'
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    tb = TensorBoard(log_dir=path)
+
+    model.fit(X, y, batch_size=32, epochs=30, callbacks=[tb])
 
     return model
 
