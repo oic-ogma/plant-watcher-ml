@@ -6,7 +6,7 @@ import model as ml
 import os
 
 
-categories = dp.get_plants_name()
+categories = dp.get_plants_name('en')
 classes = len(categories)
 
 

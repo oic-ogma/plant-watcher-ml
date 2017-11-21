@@ -2,6 +2,8 @@ from PIL import Image
 import numpy as np
 import os
 import json
+import string
+import random
 
 
 def image_convert(file, img_size):
@@ -32,10 +34,27 @@ def sort_predict_key(data, num):
     return y
 
 
-def get_plants_name():
+def get_plants_name(lang):
+
+    key = ''
+
+    if lang == 'en':
+        key = 0
+
+    if lang == 'ja':
+        key = 1
 
     f = open(os.path.join(os.path.dirname(__file__), 'store/plant.json'), 'r')
     json_data = json.load(f)
-    categories = list(json_data.values())[0]
+    categories = list(json_data.values())[key]
 
     return categories
+
+
+def make_random_str(num):
+
+    chars = string.ascii_letters + string.digits
+    s = ''
+    random_str = s.join([random.choice(chars) for i in range(num)])
+
+    return random_str
