@@ -33,7 +33,17 @@ RUN yum -y install \
   python-devel
 
 
-# python3 インストール
+# LANG Setting
+RUN rm -f /etc/rpm/macros.image-language-conf && \
+    sed -i '/^override_install_langs=/d' /etc/yum.conf && \
+    yum -y reinstall glibc-common && \
+    yum clean all
+ENV LANG="ja_JP.UTF-8" \
+    LANGUAGE="ja_JP:ja" \
+    LC_ALL="ja_JP.UTF-8"
+
+
+# python3 Install
 RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum install -y \
   python35u \
@@ -41,13 +51,15 @@ RUN yum install -y \
   python35u-devel \
   python35u-pip
 
-# エイリアス設定
+
+# Alias Setting
 RUN ln -s /usr/bin/python3.5 /usr/bin/python3
 RUN unlink /usr/bin/python
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3.5 /usr/bin/pip
 
-# モジュールインストール
+
+# Library install
 RUN pip install \
   numpy \
   pyyaml \

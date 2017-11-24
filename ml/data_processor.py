@@ -36,17 +36,9 @@ def sort_predict_key(data, num):
 
 def get_plants_name(lang):
 
-    key = ''
-
-    if lang == 'en':
-        key = 0
-
-    if lang == 'ja':
-        key = 1
-
-    f = open(os.path.join(os.path.dirname(__file__), 'store/plant.json'), 'r')
+    f = open(os.path.join(os.path.dirname(__file__), 'store/plant.json'), 'r', encoding='utf-8')
     json_data = json.load(f)
-    categories = list(json_data.values())[key]
+    categories = json_data[lang]
 
     return categories
 
