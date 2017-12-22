@@ -1,4 +1,5 @@
 import json
+import sys
 import os
 import re
 import time
@@ -51,7 +52,7 @@ def download_thumb(info, save_dir):
         title = photo["photo_title"]
         photo_id = photo["photo_id"]
         url = photo["thumbnail_image_url"]
-        path = save_dir + "/" + str(photo_id) + "_thumb.jpg"
+        path = save_dir + "/" + str(photo_id) + ".jpg"
 
         if os.path.exists(path):
             continue
@@ -100,5 +101,5 @@ def download_all(keyword, save_dir, maxphoto=100):
 
 
 if __name__ == "__main__":
-    search = "カーネーション"
-    download_all(search, "./image/"+search)
+    search = sys.argv[1]
+    download_all("{}".format(search), "./image/"+search)
