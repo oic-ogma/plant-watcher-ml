@@ -5,7 +5,7 @@ import glob
 import numpy as np
 
 root_dir = "./store/images"
-categories = dp.get_plants_name()
+categories = dp.get_plants_name('en')
 image_size = 120
 
 X = []  # 画像データ
