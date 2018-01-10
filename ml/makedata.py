@@ -1,8 +1,8 @@
-from sklearn import model_selection
-import data_processor as dp
-from PIL import Image
 import glob
+import data_processor as dp
 import numpy as np
+from PIL import Image
+from sklearn import model_selection
 
 root_dir = "./store/images"
 categories = dp.get_plants_name('en')

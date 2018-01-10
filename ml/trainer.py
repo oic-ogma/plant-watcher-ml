@@ -1,9 +1,9 @@
-from keras.utils import np_utils
-from keras.callbacks import TensorBoard
-import data_processor as dp
+import os
 import numpy as np
 import model as ml
-import os
+import data_processor as dp
+from keras.utils import np_utils
+from keras.callbacks import TensorBoard
 
 
 categories = dp.get_plants_name('en')

@@ -1,8 +1,8 @@
+import os
+import base64
 import model as ml
 import data_processor as dp
 from flask import Flask, make_response, jsonify, request
-import os
-import base64
 
 categories = dp.get_plants_name('ja')
 classes = len(categories)

@@ -1,10 +1,9 @@
-from PIL import Image
-import numpy as np
 import os
 import json
 import string
 import random
-
+import numpy as np
+from PIL import Image
 
 def image_convert(file, img_size):
 
