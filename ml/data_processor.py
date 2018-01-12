@@ -10,6 +10,7 @@ def image_convert(file, img_size):
     X = []
 
     img = Image.open(file)
+    img = crop_center(img)
     img = img.convert('RGB')
     img = img.resize((img_size, img_size))
 
@@ -49,3 +50,12 @@ def make_random_str(num):
     random_str = s.join([random.choice(chars) for i in range(num)])
 
     return random_str
+
+def crop_center(file):
+    img = Image.open(file)
+    img_width, img_height = img.size
+
+    return img.crop(((img_width - img_width) // 2, 
+                    (img_height - img_width) // 2, 
+                    (img_width + img_width) // 2, 
+                    (img_height + img_width) // 2))
