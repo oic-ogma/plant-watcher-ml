@@ -51,8 +51,10 @@ def make_random_str(num):
 
     return random_str
 
+
 def crop_center(file):
-    img = Image.open(file)
+
+    img = file
     img_width, img_height = img.size
 
     return img.crop(((img_width - img_width) // 2, 
